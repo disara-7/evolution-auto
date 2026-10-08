@@ -136,44 +136,46 @@
   new IntersectionObserver(([e]) => e.isIntersecting && navLinks.forEach((l) => l.classList.remove("is-active")), { threshold: 0.6 }).observe($("#hero"));
 
   /* ---------------------------------------------------------
-     Hero: entrance + cursor-driven parallax / lighting
+     Hero: entrance + background carousel
      --------------------------------------------------------- */
   const hero = $("#hero");
   requestAnimationFrame(() => setTimeout(() => hero.classList.add("is-in"), 120));
 
-  // Background carousel — advances every 6s, pauses while the tab is hidden
+  // Background carousel — advances every 6s (pauses while the tab is hidden); line nav jumps to a slide
   const heroImgs = $$(".hero__img");
-  if (heroImgs.length > 1 && !reducedMotion) {
+  const heroNav = $(".hero__nav");
+  const HERO_MS = 6000;
+  if (heroImgs.length > 1) {
     let heroIdx = 0;
     let heroTimer;
-    const nextHeroImg = () => {
-      heroImgs[heroIdx].classList.remove("is-active");
-      heroIdx = (heroIdx + 1) % heroImgs.length;
-      heroImgs[heroIdx].classList.add("is-active");
-    };
-    const startHero = () => { clearInterval(heroTimer); heroTimer = setInterval(nextHeroImg, 6000); };
-    document.addEventListener("visibilitychange", () => (document.hidden ? clearInterval(heroTimer) : startHero()));
-    startHero();
-  }
+    heroNav.style.setProperty("--hero-ms", `${HERO_MS}ms`);
+    heroNav.classList.toggle("is-static", reducedMotion);
+    heroNav.innerHTML = heroImgs
+      .map((img, i) => `<button type="button" class="hero__dot" role="tab" aria-label="${i + 1} of ${heroImgs.length}: ${img.alt}"><span></span></button>`)
+      .join("");
+    const heroDots = $$(".hero__dot", heroNav);
 
-  if (finePointer.matches && !reducedMotion) {
-    let tx = 0, ty = 0, cx = 0, cy = 0, running = false;
-    const tick = () => {
-      cx = lerp(cx, tx, 0.06);
-      cy = lerp(cy, ty, 0.06);
-      hero.style.setProperty("--mx", cx.toFixed(4));
-      hero.style.setProperty("--my", cy.toFixed(4));
-      if (Math.abs(cx - tx) > 0.001 || Math.abs(cy - ty) > 0.001) requestAnimationFrame(tick);
-      else running = false;
+    const schedule = () => {
+      clearTimeout(heroTimer);
+      if (!reducedMotion && !document.hidden) heroTimer = setTimeout(() => goTo(heroIdx + 1), HERO_MS);
     };
-    const kick = () => { if (!running) { running = true; requestAnimationFrame(tick); } };
-    hero.addEventListener("mousemove", (e) => {
-      const r = hero.getBoundingClientRect();
-      tx = ((e.clientX - r.left) / r.width) * 2 - 1;
-      ty = ((e.clientY - r.top) / r.height) * 2 - 1;
-      kick();
-    });
-    hero.addEventListener("mouseleave", () => { tx = 0; ty = 0; kick(); });
+    const goTo = (i) => {
+      heroIdx = (i + heroImgs.length) % heroImgs.length;
+      heroImgs.forEach((img, n) => img.classList.toggle("is-active", n === heroIdx));
+      heroDots.forEach((dot, n) => {
+        dot.setAttribute("aria-selected", String(n === heroIdx));
+        // restart the fill animation on the newly active line
+        dot.classList.remove("is-active");
+        if (n === heroIdx) { void dot.offsetWidth; dot.classList.add("is-active"); }
+      });
+      schedule();
+    };
+
+    heroDots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
+    document.addEventListener("visibilitychange", () => (document.hidden ? clearTimeout(heroTimer) : goTo(heroIdx)));
+    goTo(0);
+  } else if (heroNav) {
+    heroNav.remove();
   }
 
   /* ---------------------------------------------------------

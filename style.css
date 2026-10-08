@@ -29,7 +29,7 @@
 
   --container: 1360px;
   --gutter: clamp(16px, 4vw, 56px);
-  --section: clamp(96px, 13vw, 190px);
+  --section: clamp(64px, 8vw, 120px);
   --header-h: 76px;
   --radius: 6px;
 }
@@ -296,8 +296,6 @@ address { font-style: normal; }
   align-items: flex-end; /* text sits just above the finder panel */
   z-index: 2; /* lets the finder hang over the next section */
   background: var(--white);
-  --mx: 0;
-  --my: 0;
   --hp: 0; /* scroll progress 0..1 */
 }
 .hero__frame {
@@ -310,9 +308,9 @@ address { font-style: normal; }
 }
 .hero__media {
   position: absolute;
-  inset: -16px; /* just enough bleed for the cursor parallax — keeps images near native size */
+  inset: -16px; /* small bleed so the scroll drift never shows an edge */
   transform:
-    translate3d(calc(var(--mx) * -14px), calc(var(--my) * -9px + var(--hp) * 90px), 0)
+    translate3d(0, calc(var(--hp) * 90px), 0)
     scale(calc(1 + var(--hp) * 0.12));
   will-change: transform;
 }
@@ -332,23 +330,11 @@ address { font-style: normal; }
 .hero__img:first-child { animation: heroIn 2.4s var(--ease) both; }
 @keyframes heroIn { from { filter: brightness(1.12) saturate(0.8); } }
 
-/* Lighting/reflection that follows the cursor */
-.hero__light {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    40vw 30vw at calc(50% + var(--mx) * 30%) calc(40% + var(--my) * 25%),
-    rgba(255, 255, 255, 0.35),
-    transparent 70%
-  );
-  mix-blend-mode: soft-light;
-}
 .hero__shade {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(42% 34% at 50% 68%, rgba(250, 250, 248, 0.88) 0%, rgba(250, 250, 248, 0.5) 55%, transparent 100%),
+    radial-gradient(50% 42% at 50% 62%, rgba(250, 250, 248, 0.96) 0%, rgba(250, 250, 248, 0.82) 45%, rgba(250, 250, 248, 0.4) 75%, transparent 100%),
     linear-gradient(to top, rgba(10, 11, 12, 0.22), transparent 35%);
 }
 .hero__content {
@@ -358,8 +344,8 @@ address { font-style: normal; }
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-bottom: 160px; /* the part of the finder panel inside the hero + a gap */
-  transform: translate3d(calc(var(--mx) * 6px), calc(var(--my) * 4px - var(--hp) * 140px), 0);
+  padding-bottom: 150px; /* the part of the finder panel inside the hero + a gap */
+  transform: translate3d(0, calc(var(--hp) * -140px), 0);
   opacity: calc(1 - var(--hp) * 1.6);
 }
 .hero__title {
@@ -382,6 +368,41 @@ address { font-style: normal; }
 .hero .reveal-load { opacity: 0; transform: translateY(20px); transition: opacity 1.2s var(--ease), transform 1.2s var(--ease); }
 .hero.is-in .reveal-load { opacity: 1; transform: none; }
 .hero .hero__lead.reveal-load { transition-delay: 0.45s; }
+.hero .hero__nav.reveal-load { transition-delay: 0.6s; }
+
+/* Carousel navigation: thin horizontal lines; the active one is longer and fills green over the slide's duration */
+.hero__nav { display: flex; justify-content: center; gap: 6px; margin-top: 30px; }
+.hero__dot {
+  display: flex;
+  align-items: center;
+  width: 34px;
+  height: 22px; /* comfortable hit area around a 3px line */
+  cursor: pointer;
+  transition: width 0.6s var(--ease);
+}
+.hero__dot span {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(17, 19, 21, 0.3);
+  overflow: hidden;
+  transition: background-color 0.3s var(--ease);
+}
+.hero__dot:hover span { background: rgba(17, 19, 21, 0.5); }
+.hero__dot.is-active span { background: rgba(17, 19, 21, 0.4); }
+.hero__dot span::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent-deep);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.hero__dot.is-active { width: 64px; }
+.hero__dot.is-active span::after { animation: heroLine var(--hero-ms, 6000ms) linear forwards; }
+.hero__nav.is-static .hero__dot.is-active span::after { animation: none; transform: none; }
+@keyframes heroLine { to { transform: scaleX(1); } }
 .hero .finder.reveal-load { transition-delay: 0.8s; }
 
 /* Quick finder panel, straddling the bottom edge of the hero */
@@ -1353,7 +1374,7 @@ address { font-style: normal; }
   .hero__content { margin-top: 0; padding-top: 52px; padding-bottom: 76px; }
   .hero__title .line { display: block; }
   .hero__img { object-position: var(--pos-m, 72% 60%); }
-  .hero__shade { background: linear-gradient(to bottom, rgba(250, 250, 248, 0.85) 0%, rgba(250, 250, 248, 0.6) 62%, transparent 88%), linear-gradient(to top, rgba(10, 11, 12, 0.25), transparent 30%); }
+  .hero__shade { background: linear-gradient(to bottom, rgba(250, 250, 248, 0.92) 0%, rgba(250, 250, 248, 0.8) 65%, transparent 95%), linear-gradient(to top, rgba(10, 11, 12, 0.25), transparent 30%); }
   .hero__title { font-size: clamp(3rem, 14vw, 4rem); margin-bottom: 16px; }
   .finder-wrap { position: relative; transform: none; margin-bottom: -56px; }
   .finder { grid-template-columns: 1fr 1fr; padding: 14px; gap: 8px; }
