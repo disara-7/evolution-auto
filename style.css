@@ -240,9 +240,8 @@ address { font-style: normal; }
 .header.is-hidden { transform: translateY(-100%); }
 
 .logo { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); }
-.logo__mark { width: 26px; height: 26px; color: var(--accent); }
-.logo__word { font-size: 14px; letter-spacing: 0.24em; font-weight: 500; white-space: nowrap; }
-.logo__word b { font-weight: 700; }
+.logo__img { display: block; height: 40px; width: auto; transition: height 0.5s var(--ease); }
+.header.is-scrolled .logo__img { height: 34px; }
 .logo--light { color: var(--white); }
 
 .nav { display: flex; align-items: center; gap: clamp(18px, 2.2vw, 34px); margin-left: auto; }
