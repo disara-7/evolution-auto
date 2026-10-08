@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evolution Auto — Drive the Evolution</title>
+  <meta name="description" content="Evolution Auto is moving Sri Lanka into the next generation of electric mobility — premium EVs, charging, service and sustainable energy.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/images/hero.jpg">
+  <link rel="icon" href="assets/icons/logo-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Inline icon sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-mark" viewBox="0 0 32 32"><path d="M6 7h20l-3 4H6zM6 14h15l-3 4H6zM6 21h20l-3 4H6z" fill="currentColor"/></symbol>
+  </svg>
+
+  <div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__label"></span></div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="#top" class="logo" aria-label="Evolution Auto home">
+        <svg class="logo__mark"><use href="#i-mark"/></svg>
+        <span class="logo__word">EVOLUTION <b>AUTO</b></span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Primary">
+        <a href="#about" class="nav__link">About Us</a>
+        <a href="#showcase" class="nav__link">Vehicles</a>
+        <a href="#brands" class="nav__link">Brands</a>
+        <a href="#ecosystem" class="nav__link">EV Solutions</a>
+        <a href="#sustainability" class="nav__link">Sustainability</a>
+        <a href="#news" class="nav__link">News</a>
+        <a href="#contact" class="nav__link">Contact</a>
+        <a href="#explorer" class="btn btn--primary nav__cta-mobile">Explore Vehicles</a>
+      </nav>
+      <a href="#explorer" class="btn btn--primary btn--sm header__cta">Explore Vehicles</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero" aria-label="Drive the Evolution">
+      <div class="hero__frame">
+        <div class="hero__media">
+          <img src="assets/images/hero.jpg" alt="White electric sedan parked on a misty coastal mountain road" class="hero__img">
+        </div>
+        <div class="hero__light" aria-hidden="true"></div>
+        <div class="hero__shade" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero__content container">
+        <p class="eyebrow hero__eyebrow reveal-load"><span class="eyebrow__line"></span>Electric Mobility · Sri Lanka</p>
+        <h1 class="hero__title">
+          <span class="line"><span>Drive the</span></span>
+          <span class="line"><span>Evolution<i class="dot">.</i></span></span>
+        </h1>
+        <p class="hero__lead reveal-load">Experience the next generation of electric mobility.</p>
+        <div class="hero__actions reveal-load">
+          <a href="#explorer" class="btn btn--primary">Explore Vehicles <svg class="i"><use href="#i-arrow"/></svg></a>
+          <a href="#about" class="btn btn--ghost">Discover Evolution</a>
+        </div>
+      </div>
+
+      <a href="#about" class="hero__scroll" aria-label="Scroll to next section"><span>Scroll</span><i></i></a>
+    </section>
+
+    <!-- ============ INTRODUCTION ============ -->
+    <section class="intro section" id="about">
+      <div class="container container--narrow intro__inner">
+        <p class="eyebrow reveal">Evolution Auto</p>
+        <h2 class="display intro__title" data-split>Moving Sri Lanka Forward.</h2>
+        <span class="accent-line" data-reveal-line></span>
+        <p class="lead reveal" data-delay="2">
+          Evolution Auto brings the world's most forward-thinking electric vehicle brands to Sri Lanka —
+          and the charging, service and energy expertise that makes switching effortless.
+          We're not simply selling cars. We're building the foundations of a cleaner, smarter way to move.
+        </p>
+        <ul class="pillars reveal" data-delay="3">
+          <li><span>01</span>EV Mobility</li>
+          <li><span>02</span>Automotive Distribution</li>
+          <li><span>03</span>Premium Vehicles</li>
+          <li><span>04</span>Sustainable Transport</li>
+        </ul>
+      </div>
+      <!-- Transition: EV energy line travels into the next section -->
+      <div class="energy-line" aria-hidden="true"><i></i></div>
+    </section>
+
+    <!-- ============ EVOLUTION STORY (sticky) ============ -->
+    <section class="story" id="story" aria-label="The Evolution Is Already Here">
+      <div class="story__sticky">
+        <div class="container story__grid">
+          <div class="story__text">
+            <p class="eyebrow">The Story</p>
+            <h2 class="display story__title">The Evolution<br>Is Already Here.</h2>
+
+            <div class="story__steps">
+              <article class="story__step is-active" data-step="0">
+                <h3>Electric</h3>
+                <p>Instant torque, near-silent cabins and zero tailpipe emissions. Driving, refined from the ground up.</p>
+                <div class="stat"><b>0 g</b><span>tailpipe CO₂ per km</span></div>
+              </article>
+              <article class="story__step" data-step="1">
+                <h3>Intelligent</h3>
+                <p>Advanced driver assistance and software that improves over time — your vehicle gets better after you drive it home.</p>
+                <div class="stat"><b>OTA</b><span>over-the-air updates</span></div>
+              </article>
+              <article class="story__step" data-step="2">
+                <h3>Sustainable</h3>
+                <p>Paired with home solar, every kilometre can be powered by sunlight. Mobility that gives back more than it takes.</p>
+                <div class="stat"><b>100%</b><span>electric drivetrain</span></div>
+              </article>
+              <article class="story__step" data-step="3">
+                <h3>Connected</h3>
+                <p>Navigation, charging, service and your vehicle — connected in one seamless ecosystem, wherever the road leads.</p>
+                <div class="stat"><b>24/7</b><span>connected support</span></div>
+              </article>
+            </div>
+
+            <div class="story__progress" aria-hidden="true">
+              <span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span>
+            </div>
+          </div>
+
+          <div class="story__visual" data-cursor="view">
+            <figure class="story__img is-active"><img src="assets/images/story-electric.jpg" alt="Charging connector plugged into an electric vehicle" loading="lazy"></figure>
+            <figure class="story__img"><img src="assets/images/story-intelligent.jpg" alt="Close-up of an EV headlight under patterned light" loading="lazy"></figure>
+            <figure class="story__img"><img src="assets/images/story-sustainable.jpg" alt="Electric car parked in a green field at sunset" loading="lazy"></figure>
+            <figure class="story__img"><img src="assets/images/story-connected.jpg" alt="City highway with light trails at dusk" loading="lazy"></figure>
+            <span class="story__counter"><b>01</b> / 04</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VEHICLE SHOWCASE (horizontal) ============ -->
+    <section class="showcase section" id="showcase">
+      <div class="container showcase__head">
+        <div>
+          <p class="eyebrow reveal">The Range</p>
+          <h2 class="display" data-split>Built for the way<br>the world is moving.</h2>
+        </div>
+        <div class="showcase__controls reveal" data-delay="2">
+          <button class="round-btn" data-gallery-prev aria-label="Previous vehicles"><svg class="i"><use href="#i-chev-l"/></svg></button>
+          <button class="round-btn" data-gallery-next aria-label="Next vehicles"><svg class="i"><use href="#i-chev-r"/></svg></button>
+        </div>
+      </div>
+
+      <div class="gallery" id="gallery" data-cursor="drag" tabindex="0" aria-label="Vehicle gallery, scroll horizontally">
+        <div class="gallery__track" id="galleryTrack"><!-- rendered by script.js --></div>
+      </div>
+
+      <div class="container">
+        <div class="gallery__progress" aria-hidden="true"><i id="galleryBar"></i></div>
+      </div>
+    </section>
+
+    <!-- ============ VEHICLE EXPLORER ============ -->
+    <section class="explorer section section--soft" id="explorer">
+      <div class="container">
+        <div class="explorer__head">
+          <div>
+            <p class="eyebrow reveal">Vehicle Explorer</p>
+            <h2 class="display" data-split>Find Your Next EV.</h2>
+          </div>
+          <p class="explorer__count reveal" data-delay="2"><b id="explorerCount">9</b> vehicles</p>
+        </div>
+
+        <div class="filters reveal" role="tablist" aria-label="Filter vehicles by category">
+          <button class="filter is-active" role="tab" aria-selected="true" data-filter="all">All</button>
+          <button class="filter" role="tab" aria-selected="false" data-filter="suv">SUV</button>
+          <button class="filter" role="tab" aria-selected="false" data-filter="sedan">Sedan</button>
+          <button class="filter" role="tab" aria-selected="false" data-filter="pickup">Pickup</button>
+          <button class="filter" role="tab" aria-selected="false" data-filter="luxury">Luxury</button>
+          <button class="filter" role="tab" aria-selected="false" data-filter="performance">Performance</button>
+          <span class="filters__indicator" aria-hidden="true"></span>
+        </div>
+
+        <div class="explorer__grid" id="explorerGrid" aria-live="polite"><!-- rendered by script.js --></div>
+      </div>
+    </section>
+
+    <!-- ============ BRANDS ============ -->
+    <section class="brands" id="brands" data-brand="0">
+      <div class="container brands__grid">
+        <div class="brands__list">
+          <p class="eyebrow reveal">Our Brands</p>
+          <h2 class="display brands__title" data-split>A curated<br>collection.</h2>
+          <ul class="brand-tabs" role="tablist" aria-label="Brands">
+            <li><button class="brand-tab is-active" role="tab" aria-selected="true" data-index="0"><span class="brand-tab__num">01</span><span class="brand-tab__name">IM Motors</span><svg class="i"><use href="#i-arrow"/></svg></button></li>
+            <li><button class="brand-tab" role="tab" aria-selected="false" data-index="1"><span class="brand-tab__num">02</span><span class="brand-tab__name">XPENG</span><svg class="i"><use href="#i-arrow"/></svg></button></li>
+            <li><button class="brand-tab" role="tab" aria-selected="false" data-index="2"><span class="brand-tab__num">03</span><span class="brand-tab__name">RIDDARA</span><svg class="i"><use href="#i-arrow"/></svg></button></li>
+            <li><button class="brand-tab" role="tab" aria-selected="false" data-index="3"><span class="brand-tab__num">04</span><span class="brand-tab__name">AION</span><svg class="i"><use href="#i-arrow"/></svg></button></li>
+          </ul>
+        </div>
+
+        <div class="brands__stage" data-cursor="view">
+          <figure class="brand-slide is-active"><img src="assets/brands/brand-im.jpg" alt="IM Motors electric sedan on an open road" loading="lazy"></figure>
+          <figure class="brand-slide"><img src="assets/brands/brand-xpeng.jpg" alt="XPENG electric vehicle with illuminated light signature" loading="lazy"></figure>
+          <figure class="brand-slide"><img src="assets/brands/brand-riddara.jpg" alt="RIDDARA electric pickup on a dirt trail" loading="lazy"></figure>
+          <figure class="brand-slide"><img src="assets/brands/brand-aion.jpg" alt="AION electric coupe at dusk" loading="lazy"></figure>
+
+          <div class="brand-info">
+            <div class="brand-info__item is-active">
+              <span class="brand-info__logo">IM</span>
+              <p>Intelligent mobility from SAIC — sculpted design, advanced chassis tech and a digital cockpit built around the driver.</p>
+              <a href="#explorer" class="link-arrow">View IM Motors <svg class="i"><use href="#i-arrow"/></svg></a>
+            </div>
+            <div class="brand-info__item">
+              <span class="brand-info__logo">XPENG</span>
+              <p>Smart EVs led by software — intelligent driving assistance and connected experiences at the heart of every model.</p>
+              <a href="#explorer" class="link-arrow">View XPENG <svg class="i"><use href="#i-arrow"/></svg></a>
+            </div>
+            <div class="brand-info__item">
+              <span class="brand-info__logo">RIDDARA</span>
+              <p>Electric pickups built for real work — capable, rugged and refined enough for the weekend escape.</p>
+              <a href="#explorer" class="link-arrow">View RIDDARA <svg class="i"><use href="#i-arrow"/></svg></a>
+            </div>
+            <div class="brand-info__item">
+              <span class="brand-info__logo">AION</span>
+              <p>Dedicated EV engineering from GAC — efficient, spacious and thoughtfully designed for everyday electric life.</p>
+              <a href="#explorer" class="link-arrow">View AION <svg class="i"><use href="#i-arrow"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STRATEGIC PARTNERSHIPS ============ -->
+    <!-- Partner names below are placeholders — replace with confirmed partner logos -->
+    <section class="partners section" id="partners">
+      <div class="container">
+        <div class="partners__head">
+          <p class="eyebrow reveal">Strategic Partnerships</p>
+          <h2 class="display" data-split>Stronger Together.</h2>
+          <p class="lead reveal" data-delay="2">Strategic partnerships that help accelerate the future of electric mobility.</p>
+        </div>
+
+        <div class="partners__grid reveal" data-delay="2">
+          <a class="partner" href="#contact">
+            <span class="partner__cat">Automotive</span>
+            <span class="partner__logo"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 20h24" stroke="currentColor" stroke-width="2"/></svg>Partner</span>
+            <span class="partner__info">Global manufacturers, local expertise.</span>
+          </a>
+          <a class="partner" href="#contact">
+            <span class="partner__cat">Energy</span>
+            <span class="partner__logo"><svg viewBox="0 0 40 40"><path d="M22 4L9 23h10l-2 13 14-20H21z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Partner</span>
+            <span class="partner__info">Solar and grid solutions for EV owners.</span>
+          </a>
+          <a class="partner" href="#contact">
+            <span class="partner__cat">Agriculture</span>
+            <span class="partner__logo"><svg viewBox="0 0 40 40"><path d="M20 36V14M20 14c0-6 5-10 12-10 0 7-5 12-12 10zM20 22c0-5-4-8-10-8 0 6 4 9 10 8z" fill="none" stroke="currentColor" stroke-width="2"/></svg>Partner</span>
+            <span class="partner__info">Electric utility vehicles for the field.</span>
+          </a>
+          <a class="partner" href="#contact">
+            <span class="partner__cat">Education</span>
+            <span class="partner__logo"><svg viewBox="0 0 40 40"><path d="M4 15l16-8 16 8-16 8zM11 19v9c5 4 13 4 18 0v-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Partner</span>
+            <span class="partner__info">Training the next generation of EV technicians.</span>
+          </a>
+          <a class="partner" href="#contact">
+            <span class="partner__cat">Healthcare</span>
+            <span class="partner__logo"><svg viewBox="0 0 40 40"><path d="M15 6h10v9h9v10h-9v9H15v-9H6V15h9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Partner</span>
+            <span class="partner__info">Clean, quiet fleets for care providers.</span>
+          </a>
+          <a class="partner" href="#contact">
+            <span class="partner__cat">Infrastructure</span>
+            <span class="partner__logo"><svg viewBox="0 0 40 40"><path d="M6 34h28M10 34V16l10-8 10 8v18M16 34v-9h8v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Partner</span>
+            <span class="partner__info">Building charging networks island-wide.</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EV ECOSYSTEM ============ -->
+    <section class="ecosystem section section--dark" id="ecosystem">
+      <div class="container">
+        <div class="ecosystem__head">
+          <p class="eyebrow eyebrow--light reveal">EV Solutions</p>
+          <h2 class="display" data-split>More Than A Car.</h2>
+          <p class="lead reveal" data-delay="2">A complete electric ecosystem — from the vehicle in your driveway to the energy that powers it.</p>
+        </div>
+
+        <div class="ecosystem__grid">
+          <div class="ecosystem__visual">
+            <figure class="eco-img is-active"><img src="assets/images/eco-vehicles.jpg" alt="Premium electric sedan on the road" loading="lazy"></figure>
+            <figure class="eco-img"><img src="assets/images/eco-energy.jpg" alt="Solar panels under a blue sky" loading="lazy"></figure>
+            <figure class="eco-img"><img src="assets/images/eco-charging.jpg" alt="EV charging connector in use" loading="lazy"></figure>
+            <figure class="eco-img"><img src="assets/images/eco-service.jpg" alt="Technician servicing a vehicle" loading="lazy"></figure>
+            <figure class="eco-img"><img src="assets/images/eco-support.jpg" alt="Driver at the wheel of a connected car" loading="lazy"></figure>
+            <figure class="eco-img"><img src="assets/images/eco-sustainability.jpg" alt="Green landscape with a winding road" loading="lazy"></figure>
+          </div>
+
+          <ol class="ecosystem__steps">
+            <li class="eco-step is-active" data-eco="0"><span class="eco-step__num">01</span><div><h3>Vehicles</h3><p>A curated line-up of premium EVs from the world's leading electric brands.</p></div></li>
+            <li class="eco-step" data-eco="1"><span class="eco-step__num">02</span><div><h3>Energy</h3><p>Home solar and storage solutions that turn sunlight into kilometres.</p></div></li>
+            <li class="eco-step" data-eco="2"><span class="eco-step__num">03</span><div><h3>Charging</h3><p>Home wallboxes and a growing public network so you're always within reach.</p></div></li>
+            <li class="eco-step" data-eco="3"><span class="eco-step__num">04</span><div><h3>Service</h3><p>Factory-trained EV technicians, genuine parts and dedicated service centres.</p></div></li>
+            <li class="eco-step" data-eco="4"><span class="eco-step__num">05</span><div><h3>Support</h3><p>Roadside assistance and an expert team on hand for every question.</p></div></li>
+            <li class="eco-step" data-eco="5"><span class="eco-step__num">06</span><div><h3>Sustainability</h3><p>Every choice working toward a cleaner, quieter Sri Lanka.</p></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TECHNOLOGY ============ -->
+    <section class="tech section" id="technology">
+      <div class="container">
+        <div class="tech__head">
+          <p class="eyebrow reveal">Technology</p>
+          <h2 class="display" data-split>Intelligence<br>Meets Motion.</h2>
+        </div>
+        <div class="tech__grid">
+          <article class="tech-item reveal" data-delay="1">
+            <svg class="tech-item__icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="6"/><circle class="pulse" cx="24" cy="24" r="14"/><circle class="pulse pulse--2" cx="24" cy="24" r="21"/></svg>
+            <h3>Smart</h3>
+            <p>Driver assistance that reads the road ahead and helps keep every journey calm and controlled.</p>
+          </article>
+          <article class="tech-item reveal" data-delay="2">
+            <svg class="tech-item__icon" viewBox="0 0 48 48" aria-hidden="true"><path class="wave" d="M10 20a20 20 0 0 1 28 0"/><path class="wave wave--2" d="M15 26a12 12 0 0 1 18 0"/><circle cx="24" cy="33" r="3"/></svg>
+            <h3>Connected</h3>
+            <p>Remote climate, charging status and over-the-air updates — your car, always within reach.</p>
+          </article>
+          <article class="tech-item reveal" data-delay="3">
+            <svg class="tech-item__icon" viewBox="0 0 48 48" aria-hidden="true"><path class="bolt" d="M27 5L12 27h11l-3 16 16-23H25z"/></svg>
+            <h3>Electric</h3>
+            <p>High-efficiency motors and advanced battery packs deliver smooth, immediate response.</p>
+          </article>
+          <article class="tech-item reveal" data-delay="4">
+            <svg class="tech-item__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 32a16 16 0 1 1 32 0"/><path class="needle" d="M24 32l9-10"/><circle cx="24" cy="32" r="2.5"/></svg>
+            <h3>Efficient</h3>
+            <p>Regenerative braking and intelligent thermal management make every charge go further.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURED EV (sticky cinematic) ============ -->
+    <section class="featured" id="featured" aria-label="Electric, Redefined">
+      <div class="featured__sticky">
+        <div class="featured__bg" aria-hidden="true"></div>
+        <div class="featured__car">
+          <img src="assets/images/featured.jpg" alt="Flagship electric saloon in a dark studio" loading="lazy">
+          <span class="featured__sweep" aria-hidden="true"></span>
+        </div>
+        <div class="featured__content container">
+          <p class="eyebrow eyebrow--light">The New Generation</p>
+          <h2 class="featured__title"><span class="line"><span>Electric,</span></span><span class="line"><span>Redefined.</span></span></h2>
+          <a href="#explorer" class="btn btn--light">Discover the Vehicle <svg class="i"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SUSTAINABILITY ============ -->
+    <section class="sustain" id="sustainability">
+      <div class="sustain__media">
+        <img src="assets/images/sustainability.jpg" alt="Modern home with warm interior lighting surrounded by greenery at dusk" loading="lazy">
+        <span class="sustain__flare" aria-hidden="true"></span>
+        <span class="sustain__flare sustain__flare--2" aria-hidden="true"></span>
+      </div>
+      <div class="sustain__overlay" aria-hidden="true"></div>
+      <div class="container sustain__content">
+        <p class="eyebrow eyebrow--light reveal">Sustainability</p>
+        <h2 class="display" data-split>Sustainability,<br>In Motion.</h2>
+        <p class="lead reveal" data-delay="2">Electric mobility powered by renewable energy is one of the most meaningful steps toward cleaner air and quieter cities. With home solar, smart charging and efficient EVs, the energy that moves you can come straight from the sun.</p>
+        <a href="#ecosystem" class="link-arrow link-arrow--light reveal" data-delay="3">Our sustainability approach <svg class="i"><use href="#i-arrow"/></svg></a>
+      </div>
+      <figure class="sustain__inset reveal" data-delay="3" data-cursor="view">
+        <img src="assets/images/solar.jpg" alt="Solar panel array in the sun" loading="lazy">
+        <figcaption>Solar + EV — clean energy, from roof to road.</figcaption>
+      </figure>
+    </section>
+
+    <!-- ============ NEWS ============ -->
+    <section class="news section" id="news">
+      <div class="container">
+        <div class="news__head">
+          <div>
+            <p class="eyebrow reveal">News &amp; Experiences</p>
+            <h2 class="display" data-split>What's Moving.</h2>
+          </div>
+          <a href="#news" class="link-arrow reveal" data-delay="2">View all stories <svg class="i"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="news__grid">
+          <a href="#news" class="news-card reveal" data-delay="1" data-cursor="view">
+            <div class="news-card__media"><img src="assets/images/news-news.jpg" alt="Audience at an Evolution Auto presentation" loading="lazy"></div>
+            <span class="news-card__tag">News</span>
+            <h3 class="news-card__title">Latest Evolution Auto updates.</h3>
+            <span class="news-card__more">Read more <svg class="i"><use href="#i-arrow"/></svg></span>
+            <span class="news-card__line"></span>
+          </a>
+          <a href="#news" class="news-card reveal" data-delay="2" data-cursor="view">
+            <div class="news-card__media"><img src="assets/images/news-events.jpg" alt="Event venue prepared for a vehicle launch" loading="lazy"></div>
+            <span class="news-card__tag">Events</span>
+            <h3 class="news-card__title">Vehicle launches and experiences.</h3>
+            <span class="news-card__more">Read more <svg class="i"><use href="#i-arrow"/></svg></span>
+            <span class="news-card__line"></span>
+          </a>
+          <a href="#news" class="news-card reveal" data-delay="3" data-cursor="view">
+            <div class="news-card__media"><img src="assets/images/news-insights.jpg" alt="Open highway stretching to the mountains" loading="lazy"></div>
+            <span class="news-card__tag">Insights</span>
+            <h3 class="news-card__title">Stories about electric mobility.</h3>
+            <span class="news-card__more">Read more <svg class="i"><use href="#i-arrow"/></svg></span>
+            <span class="news-card__line"></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta" id="contact">
+      <div class="cta__media"><img src="assets/images/cta.jpg" alt="Electric car driving toward a sunset on a winding road" loading="lazy"></div>
+      <div class="cta__shade" aria-hidden="true"></div>
+      <div class="container cta__content">
+        <h2 class="display" data-split>Your Evolution<br>Starts Here.</h2>
+        <p class="lead reveal" data-delay="2">Discover electric vehicles built for the way the world is moving.</p>
+        <div class="hero__actions reveal" data-delay="3">
+          <a href="#explorer" class="btn btn--primary">Explore Vehicles <svg class="i"><use href="#i-arrow"/></svg></a>
+          <a href="mailto:info@evolutionauto.lk" class="btn btn--glass">Contact Us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="newsletter">
+        <div>
+          <h3 class="newsletter__title">Stay Ahead of the EV Revolution.</h3>
+          <p>Get the latest EV news, launches and updates from Evolution Auto.</p>
+        </div>
+        <form class="newsletter__form" id="newsletter" novalidate>
+          <label class="sr-only" for="email">Email address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="email" required>
+          <button type="submit" class="btn btn--primary">Subscribe</button>
+          <p class="newsletter__msg" id="newsletterMsg" role="status"></p>
+        </form>
+      </div>
+
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="#top" class="logo logo--light" aria-label="Evolution Auto home">
+            <svg class="logo__mark"><use href="#i-mark"/></svg>
+            <span class="logo__word">EVOLUTION <b>AUTO</b></span>
+          </a>
+          <p>Moving people into the next generation of mobility.</p>
+        </div>
+        <nav class="footer__col" aria-label="Footer">
+          <h4>Explore</h4>
+          <a href="#about">About</a><a href="#showcase">Vehicles</a><a href="#brands">Brands</a><a href="#ecosystem">EV Solutions</a><a href="#sustainability">Sustainability</a><a href="#news">News</a><a href="#contact">Contact</a>
+        </nav>
+        <div class="footer__col">
+          <h4>Contact</h4>
+          <!-- Placeholder contact details — replace with official information -->
+          <a href="tel:+94110000000">+94 11 000 0000</a>
+          <a href="mailto:info@evolutionauto.lk">info@evolutionauto.lk</a>
+          <address>Colombo, Sri Lanka</address>
+        </div>
+        <div class="footer__col">
+          <h4>Follow</h4>
+          <a href="#" aria-label="Facebook">Facebook</a><a href="#" aria-label="Instagram">Instagram</a><a href="#" aria-label="LinkedIn">LinkedIn</a><a href="#" aria-label="YouTube">YouTube</a>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p>© <span id="year">2026</span> Evolution Auto. All rights reserved.</p>
+        <div><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
