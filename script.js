@@ -54,6 +54,19 @@
   ).join("");
 
   /* ---------------------------------------------------------
+     Partner logo marquee — append a hidden copy of the logos so
+     the -50% scroll loop wraps without a gap
+     --------------------------------------------------------- */
+  const partnersTrack = $(".partners__track");
+  if (partnersTrack && !reducedMotion) {
+    [...partnersTrack.children].forEach((el) => {
+      const copy = el.cloneNode(true);
+      copy.setAttribute("aria-hidden", "true");
+      partnersTrack.append(copy);
+    });
+  }
+
+  /* ---------------------------------------------------------
      Split headings into masked words for line-by-line reveal
      --------------------------------------------------------- */
   $$("[data-split]").forEach((el) => {
@@ -109,7 +122,7 @@
 
   // Scrollspy — thin green line under the active section's link
   const navLinks = $$(".nav__link");
-  const spyMap = { about: "about", story: "about", showcase: "showcase", explorer: "showcase", brands: "brands", partners: "brands", ecosystem: "ecosystem", technology: "ecosystem", sustainability: "sustainability", news: "news", contact: "contact" };
+  const spyMap = { about: "about", story: "about", showcase: "showcase", explorer: "showcase", brands: "brands", partners: "brands", ecosystem: "ecosystem", technology: "ecosystem", sustainability: "sustainability", news: "news", visit: "contact", contact: "contact" };
   const spyIO = new IntersectionObserver(
     (entries) =>
       entries.forEach((e) => {
@@ -127,6 +140,21 @@
      --------------------------------------------------------- */
   const hero = $("#hero");
   requestAnimationFrame(() => setTimeout(() => hero.classList.add("is-in"), 120));
+
+  // Background carousel — advances every 6s, pauses while the tab is hidden
+  const heroImgs = $$(".hero__img");
+  if (heroImgs.length > 1 && !reducedMotion) {
+    let heroIdx = 0;
+    let heroTimer;
+    const nextHeroImg = () => {
+      heroImgs[heroIdx].classList.remove("is-active");
+      heroIdx = (heroIdx + 1) % heroImgs.length;
+      heroImgs[heroIdx].classList.add("is-active");
+    };
+    const startHero = () => { clearInterval(heroTimer); heroTimer = setInterval(nextHeroImg, 6000); };
+    document.addEventListener("visibilitychange", () => (document.hidden ? clearInterval(heroTimer) : startHero()));
+    startHero();
+  }
 
   if (finePointer.matches && !reducedMotion) {
     let tx = 0, ty = 0, cx = 0, cy = 0, running = false;
@@ -376,6 +404,20 @@
   const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
   let filtering = false;
   let narrowed = false; // explorer is narrowed by the hero finder's brand/model
+  let expanded = false; // "Show more" pressed — cleared whenever the filter changes
+  const moreBtn = $("#explorerMore");
+  const phone = matchMedia("(max-width: 700px)");
+
+  // Show two rows (3 cards on phones) until "Show more" is pressed
+  const visibleLimit = () =>
+    phone.matches ? 3 : getComputedStyle(explorerGrid).gridTemplateColumns.split(" ").length * 2;
+  const applyLimit = () => {
+    const matched = items.filter((el) => !el.classList.contains("is-hidden"));
+    const limit = expanded ? Infinity : visibleLimit();
+    matched.forEach((el, i) => el.classList.toggle("is-collapsed", i >= limit));
+    moreBtn.hidden = matched.length <= limit;
+  };
+  const isShown = (el) => !el.classList.contains("is-hidden") && !el.classList.contains("is-collapsed");
 
   const moveIndicator = (btn) => {
     indicator.style.setProperty("--x", `${btn.offsetLeft}px`);
@@ -394,8 +436,7 @@
       (key === "all" || el.dataset.tags.split(" ").includes(key)) &&
       (!query.brand || el.dataset.brand === query.brand) &&
       (!query.model || el.dataset.model === query.model);
-    const visible = items.filter((el) => !el.classList.contains("is-hidden"));
-    const leaving = visible.filter((el) => !match(el));
+    const leaving = items.filter((el) => isShown(el) && !match(el));
 
     // 1. fade out cards that are leaving
     if (!reducedMotion && leaving.length) {
@@ -412,6 +453,8 @@
       el.getAnimations().forEach((a) => a.cancel());
       el.classList.toggle("is-hidden", !match(el));
     });
+    expanded = false;
+    applyLimit();
     const count = items.filter(match).length;
     countEl.textContent = count;
     countEl.nextSibling.textContent = count === 1 ? " vehicle" : " vehicles";
@@ -420,7 +463,7 @@
     if (!reducedMotion) {
       let n = 0;
       items.forEach((el) => {
-        if (el.classList.contains("is-hidden")) return;
+        if (!isShown(el)) return;
         const a = first.get(el);
         const b = el.getBoundingClientRect();
         if (a.width === 0) {
@@ -452,6 +495,23 @@
       applyFilter(btn.dataset.filter);
     })
   );
+  applyLimit();
+  addEventListener("resize", () => { if (!filtering) applyLimit(); });
+
+  moreBtn.addEventListener("click", () => {
+    const before = items.filter(isShown);
+    expanded = true;
+    applyLimit();
+    if (!reducedMotion) {
+      items.filter((el) => isShown(el) && !before.includes(el)).forEach((el, n) =>
+        el.animate(
+          [{ opacity: 0, transform: "translateY(40px) scale(0.97)" }, { opacity: 1, transform: "none" }],
+          { duration: 750, easing: EASE, delay: n * 70, fill: "backwards" }
+        )
+      );
+    }
+  });
+
   // keep scrollable filter bar in sync
   filterBar.addEventListener("scroll", () => moveIndicator(activeFilter()), { passive: true });
 
