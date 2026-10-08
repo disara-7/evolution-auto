@@ -50,7 +50,7 @@
   const explorerGrid = $("#explorerGrid");
   galleryTrack.innerHTML = VEHICLES.map((v) => `<div class="gallery__item">${cardHTML(v, "drag")}</div>`).join("");
   explorerGrid.innerHTML = VEHICLES.map(
-    (v) => `<div class="explorer__item" data-tags="${v.tags.join(" ")}">${cardHTML(v, "explore")}</div>`
+    (v) => `<div class="explorer__item" data-tags="${v.tags.join(" ")}" data-brand="${v.brand}" data-model="${v.model}">${cardHTML(v, "explore")}</div>`
   ).join("");
 
   /* ---------------------------------------------------------
@@ -375,6 +375,7 @@
   const items = $$(".explorer__item", explorerGrid);
   const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
   let filtering = false;
+  let narrowed = false; // explorer is narrowed by the hero finder's brand/model
 
   const moveIndicator = (btn) => {
     indicator.style.setProperty("--x", `${btn.offsetLeft}px`);
@@ -385,10 +386,14 @@
   addEventListener("resize", () => moveIndicator(activeFilter()));
   document.fonts?.ready.then(() => moveIndicator(activeFilter()));
 
-  const applyFilter = async (key) => {
+  // `query` narrows by brand/model (set by the hero finder); category tabs clear it
+  const applyFilter = async (key, query = {}) => {
     if (filtering) return;
     filtering = true;
-    const match = (el) => key === "all" || el.dataset.tags.split(" ").includes(key);
+    const match = (el) =>
+      (key === "all" || el.dataset.tags.split(" ").includes(key)) &&
+      (!query.brand || el.dataset.brand === query.brand) &&
+      (!query.model || el.dataset.model === query.model);
     const visible = items.filter((el) => !el.classList.contains("is-hidden"));
     const leaving = visible.filter((el) => !match(el));
 
@@ -436,7 +441,8 @@
 
   filters.forEach((btn) =>
     btn.addEventListener("click", () => {
-      if (btn.classList.contains("is-active") || filtering) return;
+      if ((btn.classList.contains("is-active") && !narrowed) || filtering) return;
+      narrowed = false;
       filters.forEach((b) => {
         b.classList.toggle("is-active", b === btn);
         b.setAttribute("aria-selected", String(b === btn));
@@ -448,6 +454,56 @@
   );
   // keep scrollable filter bar in sync
   filterBar.addEventListener("scroll", () => moveIndicator(activeFilter()), { passive: true });
+
+  /* ---------------------------------------------------------
+     Hero quick finder — Brand / Model / Body type
+     --------------------------------------------------------- */
+  const finder = $("#finder");
+  const fMake = $("#finderMake");
+  const fModel = $("#finderModel");
+  const fType = $("#finderType");
+  const fCount = $("#finderCount");
+  const fNoun = $("#finderNoun");
+  const addOptions = (sel, values, label = (v) => v) =>
+    values.forEach((v) => sel.add(new Option(label(v), v)));
+
+  addOptions(fMake, [...new Set(VEHICLES.map((v) => v.brand))]);
+  addOptions(fType, Object.keys(TAG_LABEL), (k) => TAG_LABEL[k]);
+
+  const updateFinder = () => {
+    const n = VEHICLES.filter(
+      (v) =>
+        (!fMake.value || v.brand === fMake.value) &&
+        (!fModel.value || v.model === fModel.value) &&
+        (!fType.value || v.tags.includes(fType.value))
+    ).length;
+    fCount.textContent = n;
+    fNoun.textContent = n === 1 ? "vehicle" : "vehicles";
+  };
+
+  fMake.addEventListener("change", () => {
+    fModel.length = 1;
+    fModel.disabled = !fMake.value;
+    addOptions(fModel, VEHICLES.filter((v) => v.brand === fMake.value).map((v) => v.model));
+    updateFinder();
+  });
+  fModel.addEventListener("change", updateFinder);
+  fType.addEventListener("change", updateFinder);
+  updateFinder();
+
+  finder.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const key = fType.value || "all";
+    const tab = filters.find((b) => b.dataset.filter === key);
+    filters.forEach((b) => {
+      b.classList.toggle("is-active", b === tab);
+      b.setAttribute("aria-selected", String(b === tab));
+    });
+    moveIndicator(tab);
+    narrowed = !!fMake.value;
+    applyFilter(key, { brand: fMake.value, model: fModel.value });
+    $("#explorer").scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
+  });
 
   /* ---------------------------------------------------------
      Brands catalogue

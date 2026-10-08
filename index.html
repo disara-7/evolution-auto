@@ -58,19 +58,31 @@
       </div>
 
       <div class="hero__content container">
-        <p class="eyebrow hero__eyebrow reveal-load"><span class="eyebrow__line"></span>Electric Mobility · Sri Lanka</p>
         <h1 class="hero__title">
           <span class="line"><span>Drive the</span></span>
           <span class="line"><span>Evolution<i class="dot">.</i></span></span>
         </h1>
         <p class="hero__lead reveal-load">Experience the next generation of electric mobility.</p>
-        <div class="hero__actions reveal-load">
-          <a href="#explorer" class="btn btn--primary">Explore Vehicles <svg class="i"><use href="#i-arrow"/></svg></a>
-          <a href="#about" class="btn btn--ghost">Discover Evolution</a>
-        </div>
       </div>
 
-      <a href="#about" class="hero__scroll" aria-label="Scroll to next section"><span>Scroll</span><i></i></a>
+      <!-- Quick finder — hangs off the bottom edge of the hero -->
+      <div class="finder-wrap container">
+        <form class="finder reveal-load" id="finder" aria-label="Find your EV">
+          <label class="finder__field">
+            <span class="finder__label">Brand</span>
+            <span class="finder__control"><select id="finderMake" name="make"><option value="">All brands</option></select></span>
+          </label>
+          <label class="finder__field">
+            <span class="finder__label">Model</span>
+            <span class="finder__control"><select id="finderModel" name="model" disabled><option value="">All models</option></select></span>
+          </label>
+          <label class="finder__field">
+            <span class="finder__label">Body Type</span>
+            <span class="finder__control"><select id="finderType" name="type"><option value="">All types</option></select></span>
+          </label>
+          <button type="submit" class="btn btn--primary finder__submit"><span>Show <b id="finderCount">9</b> <span id="finderNoun">vehicles</span></span> <svg class="i"><use href="#i-arrow"/></svg></button>
+        </form>
+      </div>
     </section>
 
     <!-- ============ INTRODUCTION ============ -->
